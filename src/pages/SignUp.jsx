@@ -23,7 +23,7 @@ export const SignUp = () => {
   const onSignUp = () => {
     const data = {
       email: email,
-      name: name,
+      name: nam,
       password: password,
     };
 
