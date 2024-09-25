@@ -22,7 +22,7 @@ export const SignUp = () => {
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const onSignUp = () => {
     const data = {
-      email: email,
+      email: emai,
       name: name,
       password: password,
     };
