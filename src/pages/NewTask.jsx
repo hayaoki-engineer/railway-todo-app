@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { url } from '../const';
 import { Header } from '../components/Header';
-import './newTask.css';
+import './newTask.scss';
 import { useNavigate } from 'react-router-dom';
 
 export const NewTask = () => {
@@ -13,7 +13,7 @@ export const NewTask = () => {
   const [detail, setDetail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies] = useCookies();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
   const handleSelectList = (id) => setSelectListId(id);
@@ -31,7 +31,7 @@ export const NewTask = () => {
         },
       })
       .then(() => {
-        history.push('/');
+        navigate('/');
       })
       .catch((err) => {
         setErrorMessage(`タスクの作成に失敗しました。${err}`);

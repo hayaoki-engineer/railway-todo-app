@@ -1,20 +1,20 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, Navigate } from 'react-router-dom';
-import { signIn } from '../authSlice';
-import { Header } from '../components/Header';
-import { url } from '../const';
-import './signUp.css';
+import axios from "axios";
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Navigate } from "react-router-dom";
+import { signIn } from "../authSlice";
+import { Header } from "../components/Header";
+import { url } from "../const";
+import "./signUp.scss";
 
 export const SignUp = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth.isSignIn);
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessge] = useState();
   const [cookies, setCookie, removeCookie] = useCookies();
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -23,7 +23,7 @@ export const SignUp = () => {
   const onSignUp = () => {
     const data = {
       email: email,
-      name: nam,
+      name: name,
       password: password,
     };
 
@@ -32,8 +32,8 @@ export const SignUp = () => {
       .then((res) => {
         const token = res.data.token;
         dispatch(signIn());
-        setCookie('token', token);
-        navigate('/');
+        setCookie("token", token);
+        navigate("/");
       })
       .catch((err) => {
         setErrorMessge(`サインアップに失敗しました。 ${err}`);
