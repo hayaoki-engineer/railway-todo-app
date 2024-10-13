@@ -12,16 +12,20 @@ export const EditTask = () => {
   const [cookies] = useCookies();
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
+  const [limit, setLimit] = useState(''); // 期限日時用のstateを追加
   const [isDone, setIsDone] = useState();
   const [errorMessage, setErrorMessage] = useState('');
+
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
+  const handleLimitChange = (e) => setLimit(e.target.value); // 期限日時の変更
   const handleIsDoneChange = (e) => setIsDone(e.target.value === 'done');
+
   const onUpdateTask = () => {
-    console.log(isDone);
     const data = {
       title: title,
       detail: detail,
+      limit: new Date(limit).toISOString(), // 期限日時をYYYY-MM-DDTHH:MM:SSZ形式に変換
       done: isDone,
     };
 
@@ -32,7 +36,6 @@ export const EditTask = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         navigate('/');
       })
       .catch((err) => {
@@ -66,6 +69,7 @@ export const EditTask = () => {
         const task = res.data;
         setTitle(task.title);
         setDetail(task.detail);
+        setLimit(task.limit); // 期限日時を取得して設定
         setIsDone(task.done);
       })
       .catch((err) => {
@@ -96,6 +100,15 @@ export const EditTask = () => {
             onChange={handleDetailChange}
             className="edit-task-detail"
             value={detail}
+          />
+          <br />
+          <label>期限日時</label>
+          <br />
+          <input
+            type="datetime-local"
+            value={limit ? new Date(limit).toISOString().slice(0, 16) : ''} // 期限日時を表示・編集
+            onChange={handleLimitChange}
+            className="edit-task-limit"
           />
           <br />
           <div>
