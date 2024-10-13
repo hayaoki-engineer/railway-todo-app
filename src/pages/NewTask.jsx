@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import axios from "axios";
-import { url } from "../const";
-import { Header } from "../components/Header";
-import "./newTask.css";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import { url } from '../const';
+import { Header } from '../components/Header';
+import './newTask.css';
+import { useNavigate } from 'react-router-dom';
 
 export const NewTask = () => {
   const [selectListId, setSelectListId] = useState();
   const [lists, setLists] = useState([]);
-  const [title, setTitle] = useState("");
-  const [detail, setDetail] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [title, setTitle] = useState('');
+  const [detail, setDetail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [cookies] = useCookies();
   const history = useNavigate();
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -31,7 +31,7 @@ export const NewTask = () => {
         },
       })
       .then(() => {
-        history.push("/");
+        history.push('/');
       })
       .catch((err) => {
         setErrorMessage(`タスクの作成に失敗しました。${err}`);
