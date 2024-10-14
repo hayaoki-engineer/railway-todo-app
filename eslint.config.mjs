@@ -5,4 +5,9 @@ export default [
   { files: ['**/*.{js,mjs,cjs,jsx}'] },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {
+    rules: {
+      'react/prop-types': 'off', // PropTypes のルールを無効化する
+    },
+  }
 ];
