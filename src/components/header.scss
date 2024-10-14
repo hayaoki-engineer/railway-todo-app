@@ -2,14 +2,33 @@
 
 .header {
   width: 100%;
+  padding: 0 20px;
   height: 80px;
   background-color: #242F9B;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
+  align-items: center; /* 縦方向の中央揃え */
+
+  /* タブレットとスマホ向けの高さとレイアウト調整 */
+  @media (max-width: 768px) {
+    height: 60px; /* タブレット向けに高さを調整 */
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column; /* スマホ向けに縦並びにする */
+    height: auto; /* 高さを自動にする */
+    padding: 10px; /* 上下に余白を追加 */
+  }
 }
 
 .sign-out-button {
   color: #ffffff;
   margin: auto 25px auto auto;
+  cursor: pointer;
+
+  /* スマホ向けに中央揃え */
+  @media (max-width: 480px) {
+    margin: 10px 0 0 0; /* 上側に余白を追加し、中央揃えにする */
+  }
 }

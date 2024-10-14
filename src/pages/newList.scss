@@ -3,21 +3,52 @@
 .new-list {
   width: 1000px;
   margin: 0 auto;
+
+  /* タブレットとスマホ向けの幅調整 */
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+  }
 }
 
 .new-list-form {
   color: #555555;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column; /* フォームの要素を縦に並べる */
 }
 
 .new-list-title {
-  width: 300px;
-  margin-bottom: 25px;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box; /* パディングを含めて幅を調整する */
+}
+
+.new-list-button {
+  width: 100px;
+  height: 45px;
+  margin: 20px 10px;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box; /* パディングを含めた幅で調整する */
+
+  /* スマホ向けの幅調整 */
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 15px 0;
+  }
 }
 
 .new-list-button {
   background-color: #242F9B;
   color: #ffffff;
-  width: 80px;
-  height: 40px;
-  border-radius: 5px;
+}
+
+.error-message {
+  color: #ff3333;
+  margin-top: 15px;
 }

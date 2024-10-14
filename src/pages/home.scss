@@ -1,57 +1,120 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .taskList {
   margin: 50px auto;
   list-style: none;
   width: 1000px;
+
+  /* タブレットとスマホ向けの幅調整 */
+  @media (max-width: 768px) {
+    width: 95%; /* タブレット向けに幅を縮小 */
+  }
+
+  @media (max-width: 480px) {
+    width: 100%; /* スマホ向けに幅を100%に */
+    padding: 0 10px; /* スマホ用の余白を追加 */
+  }
 }
 
 .list-header {
   display: flex;
   justify-content: space-between;
+
+  /* スマホ向けにレイアウトを縦並びにする */
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
 }
 
 .list-menu {
   text-align: right;
+
+  @media (max-width: 480px) {
+    text-align: left;
+    margin-top: 10px;
+  }
 }
 
 .list-tab {
   list-style: none;
   display: flex;
   overflow-x: auto;
+
+  /* タブレットとスマホ向けの調整 */
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .list-tab-item {
   flex-shrink: 0;
-  width: 100px;
-  padding: 0 25px;
+  width: 120px; /* 幅を調整 */
+  padding: 10px 20px;
   text-overflow: normal;
   margin-right: 5px;
-  border: solid 1px #242F9B;
+  border: solid 1px #242f9b;
   justify-content: center;
   align-items: center;
+
+  /* スマホ向けのリスト項目の調整 */
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
 }
 
 .active {
-  background-color: #242F9B;
+  background-color: #242f9b;
   color: #ffffff;
 }
 
 .tasks {
   margin-top: 25px;
+
+  /* スマホ向けのタスク表示の調整 */
+  @media (max-width: 480px) {
+    margin-top: 10px;
+  }
 }
 
 .tasks-header {
   display: flex;
   justify-content: space-between;
+
+  /* スマホ向けにレイアウトを縦並びにする */
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
 }
 
 .task-item {
   list-style-type: none;
-  height: 70px;
-  width: calc(100% - 25px);
+  width: 100%;
   background-color: #f5f5f5;
-  padding-left: 25px;
+  padding: 15px;
+  margin-bottom: 20px;
   font-size: large;
   border: solid 1px #ffffff;
+
+  /* スマホ向けのタスク項目の調整 */
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
 }
 
 .task-item-link {
@@ -69,8 +132,15 @@
 .display-select-wrapper {
   width: 100px;
   margin: 0 0 25px auto;
+
+  /* スマホ向けにセレクトボックスを中央に寄せる */
+  @media (max-width: 480px) {
+    margin: 0 auto 25px auto;
+    width: 100%;
+  }
 }
 
 .display-select {
   width: 100%;
+  padding: 10px;
 }

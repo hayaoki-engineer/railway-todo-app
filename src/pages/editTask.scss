@@ -3,32 +3,54 @@
 .edit-task {
   width: 1000px;
   margin: 0 auto;
+
+  /* タブレットとスマホ向けの幅調整 */
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 }
 
 .edit-task-form {
   color: #555555;
 }
 
-.edit-task-title, .edit-task-detail {
+.edit-task-title, 
+.edit-task-detail, 
+.edit-task-limit {
   width: 300px;
   margin-bottom: 25px;
+
+  /* スマホ向けの幅調整 */
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+.delete-task-button, 
+.edit-task-button {
+  width: 80px;
+  height: 40px;
+  margin: 25px 5px;
+  border-radius: 5px;
+
+  /* スマホ向けの幅調整 */
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 }
 
 .delete-task-button {
   color: #ff3333;
   border: solid 1px #ff3333;
-  width: 80px;
-  height: 40px;
-  margin: 25px 5px;
-  border-radius: 5px;
 }
 
 .edit-task-button {
   background-color: #242F9B;
   color: #ffffff;
-  width: 80px;
-  height: 40px;
-  border-radius: 5px;
 }
 
 .error-message {

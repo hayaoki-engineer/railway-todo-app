@@ -3,15 +3,32 @@
 .new-task {
   width: 1000px;
   margin: 0 auto;
+
+  /* タブレットとスマホ向けの幅調整 */
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+  }
 }
 
 .new-task-form {
   color: #555555;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column; /* フォームの要素を縦に並べる */
 }
 
-.new-task-select-list, .new-task-title, .new-task-detail {
-  width: 300px;
-  margin-bottom: 25px;
+.new-task-select-list,
+.new-task-title,
+.new-task-detail,
+.new-task-limit {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box; /* パディングを含めた幅調整 */
 }
 
 .new-task-detail {
@@ -21,11 +38,21 @@
 .new-task-button {
   background-color: #242F9B;
   color: #ffffff;
-  width: 80px;
-  height: 40px;
+  width: 100px;
+  height: 45px;
+  margin: 20px 10px;
   border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box; /* パディングを含めた幅で調整する */
+
+  /* スマホ向けの幅調整 */
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 15px 0;
+  }
 }
 
 .error-message {
   color: #ff3333;
+  margin-top: 15px;
 }
