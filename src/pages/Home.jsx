@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -5,7 +6,6 @@ import axios from 'axios';
 import { Header } from '../components/Header';
 import { url } from '../const';
 import './home.scss';
-import { formatDistanceToNow } from 'date-fns'; // 残り時間を表示するために追加
 
 export const Home = () => {
   const [isDoneDisplay, setIsDoneDisplay] = useState('todo'); // todo->未完了 done->完了
@@ -14,6 +14,7 @@ export const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies] = useCookies();
+
   const handleIsDoneDisplayChange = (e) => setIsDoneDisplay(e.target.value);
 
   useEffect(() => {
@@ -66,6 +67,13 @@ export const Home = () => {
       });
   };
 
+  // キーボードでリストを切り替えるためのハンドラ
+  const handleKeyDown = (e, id) => {
+    if (e.key === 'Enter') {
+      handleSelectList(id);
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -85,14 +93,18 @@ export const Home = () => {
               </p>
             </div>
           </div>
-          <ul className="list-tab">
+          <ul className="list-tab" role="tablist">
             {lists.map((list, key) => {
               const isActive = list.id === selectListId;
               return (
                 <li
                   key={key}
                   className={`list-tab-item ${isActive ? 'active' : ''}`}
+                  role="tab"
+                  aria-selected={isActive}
+                  tabIndex={0} // フォーカス可能にする
                   onClick={() => handleSelectList(list.id)}
+                  onKeyDown={(e) => handleKeyDown(e, list.id)} // キーボードイベントハンドラ
                 >
                   {list.title}
                 </li>
@@ -130,31 +142,47 @@ const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
   if (tasks === null) return <></>;
 
-  const renderTaskItem = (task) => (
-    <li key={task.id} className="task-item">
-      <Link
-        to={`/lists/${selectListId}/tasks/${task.id}`}
-        className="task-item-link"
-      >
-        {task.title}
-        <br />
-        {task.done ? '完了' : '未完了'}
-        <br />
-        期限: {new Date(task.limit).toLocaleString()}
-        <br />
-        残り時間:{' '}
-        {formatDistanceToNow(new Date(task.limit), { addSuffix: true })}
-      </Link>
-    </li>
-  );
-
   if (isDoneDisplay === 'done') {
     return (
-      <ul>{tasks.filter((task) => task.done === true).map(renderTaskItem)}</ul>
+      <ul>
+        {tasks
+          .filter((task) => {
+            return task.done === true;
+          })
+          .map((task, key) => (
+            <li key={key} className="task-item">
+              <Link
+                to={`/lists/${selectListId}/tasks/${task.id}`}
+                className="task-item-link"
+              >
+                {task.title}
+                <br />
+                {task.done ? '完了' : '未完了'}
+              </Link>
+            </li>
+          ))}
+      </ul>
     );
   }
 
   return (
-    <ul>{tasks.filter((task) => task.done === false).map(renderTaskItem)}</ul>
+    <ul>
+      {tasks
+        .filter((task) => {
+          return task.done === false;
+        })
+        .map((task, key) => (
+          <li key={key} className="task-item">
+            <Link
+              to={`/lists/${selectListId}/tasks/${task.id}`}
+              className="task-item-link"
+            >
+              {task.title}
+              <br />
+              {task.done ? '完了' : '未完了'}
+            </Link>
+          </li>
+        ))}
+    </ul>
   );
 };
